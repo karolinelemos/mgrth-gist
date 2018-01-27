@@ -33,4 +33,5 @@ Executar `npm install`
 
 ## Executando a Aplicação
 Executar `npm start`
+
 [localhost:3000](localhost:3000)
