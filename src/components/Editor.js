@@ -1,0 +1,60 @@
+import React, { Component } from 'react';
+import CodeMirror from 'react-codemirror'
+import { Input, Grid, Dropdown, Button } from 'semantic-ui-react'
+import 'codemirror/mode/javascript/javascript' 
+import 'codemirror/mode/xml/xml'
+import 'codemirror/mode/markdown/markdown'
+import languagesConfig from '../assets/languages'
+
+class Editor extends Component {
+
+	constructor(props)
+	{
+		super(props);
+		this.state = {
+			gist: {
+				id: 0,
+				name: '', 
+				code: ''
+			},
+			options: {
+				lineNumbers: true,
+				mode: ''
+			}
+		};
+	}
+
+	updateCode = (newCode) => {
+		const gist = this.state.gist;
+		gist.code = newCode;
+		this.setState({ gist })
+	}
+
+	updateName = (event, data) => {
+		const options = this.state.options;
+		const gist = this.state.gist;
+		gist.name = data.value;
+
+		if(gist.name.indexOf(".") !== -1)
+		{
+			const extension = gist.name.substr(gist.name.indexOf("."), gist.name.lenght);
+			const language = languagesConfig.find(lang => lang.text === extension);
+			if(language)
+				options.mode = language.value
+		}
+
+		this.setState({ gist, options })
+	}
+
+	render() {
+		return (
+			<div>
+				<Input onChange={this.updateName} fluid label='Nome' placeholder="Nome do gist com extensão"/>
+				<CodeMirror value={this.state.gist.code} onChange={this.updateCode} options={this.state.options} />
+				<Button floated='right' gist={this.state.gist} primary onClick={this.props.action}>Salvar</Button>
+			</div>
+		);
+	}
+}
+
+export default Editor

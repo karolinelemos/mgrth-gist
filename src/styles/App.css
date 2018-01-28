@@ -1,5 +1,12 @@
 .App {
-	text-align: center;
 	color: #FFF;
-	background-color: #442a4f;
+	background-color: #FFF;
+}
+
+.Particles {
+	position: absolute;
+	top: 0;
+	z-index: -1;
+	height: 100%;
+	width: 100%;
 }
