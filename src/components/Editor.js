@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CodeMirror from 'react-codemirror'
-import { Input, Grid, Dropdown, Button } from 'semantic-ui-react'
+import { Input, Button } from 'semantic-ui-react'
 import 'codemirror/mode/javascript/javascript' 
 import 'codemirror/mode/xml/xml'
 import 'codemirror/mode/markdown/markdown'
@@ -22,6 +22,13 @@ class Editor extends Component {
 				mode: ''
 			}
 		};
+
+		this.saveGist = this.saveGist.bind(this);
+	}
+
+	saveGist = () => { 
+		const newGist = this.state.gist;
+		this.props.action(newGist);
 	}
 
 	updateCode = (newCode) => {
@@ -50,8 +57,8 @@ class Editor extends Component {
 		return (
 			<div>
 				<Input onChange={this.updateName} fluid label='Nome' placeholder="Nome do gist com extensão"/>
-				<CodeMirror value={this.state.gist.code} onChange={this.updateCode} options={this.state.options} />
-				<Button floated='right' gist={this.state.gist} primary onClick={this.props.action}>Salvar</Button>
+				<CodeMirror value={this.props.gist.code} onChange={this.updateCode} options={this.state.options} />
+				<Button floated='right' gist={this.state.gist} primary onClick={this.saveGist}>Salvar</Button>
 			</div>
 		);
 	}

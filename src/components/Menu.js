@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Menu } from 'semantic-ui-react'
-import GistList from './GistList'
+import { Icon, Menu, Button } from 'semantic-ui-react'
 
 class MenuApp extends Component {
 	constructor(props) 
@@ -11,6 +10,16 @@ class MenuApp extends Component {
 	state = {}
 
 	handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+	editGist = (e, element) => 
+	{
+		this.props.action('edit', element.id);
+	}
+
+	removeGist = () => 
+	{
+		this.props.action('remove', this.gist);
+	}
 
 	render() {
 		const { activeItem } = this.state
@@ -28,7 +37,17 @@ class MenuApp extends Component {
 		          		this.props.gistList ? 
 		          		(
 		          			this.props.gistList.map((gist) => {
-		          				return <GistList key={gist.id} gist={gist}/>
+		          				return (
+		          					<Menu.Item key={gist.id}>
+										<div className='GridList'>
+											<p>{gist.name}</p>
+										    <Button.Group>
+												<Button basic color='yellow' size='mini' icon='pencil' onClick={this.editGist} id={gist.id}/>
+												<Button basic color='red' size='mini' icon='trash' onClick={this.removeGist} id={gist.id}/>
+											</Button.Group>
+										</div>
+									</Menu.Item>
+		          				)
 		          			})
 		          		) : null
 		          	}
