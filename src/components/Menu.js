@@ -27,7 +27,7 @@ class MenuApp extends Component {
 		return (
 			<Menu vertical>
 				<Menu.Item name='new' active={activeItem === 'new'} onClick={this.handleItemClick}>
-		          <Icon name='add' color="yellow" />
+		          <Icon name='add' className="app-font-color" />
 		          Novo Gist
 		        </Menu.Item>
 
@@ -41,9 +41,9 @@ class MenuApp extends Component {
 		          					<Menu.Item key={gist.id}>
 										<div className='GridList'>
 											<p>{gist.name}</p>
-										    <Button.Group>
-												<Button basic color='yellow' size='mini' icon='pencil' onClick={this.editGist} id={gist.id}/>
-												<Button basic color='red' size='mini' icon='trash' onClick={this.removeGist} id={gist.id}/>
+										    <Button.Group className="app-font-color">
+												<Button basic size='mini' icon='pencil' onClick={this.editGist} id={gist.id}/>
+												<Button basic size='mini' icon='trash' onClick={this.removeGist} id={gist.id}/>
 											</Button.Group>
 										</div>
 									</Menu.Item>

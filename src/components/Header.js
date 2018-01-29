@@ -1,8 +1,9 @@
 import React from 'react'
 import { Header, Icon } from 'semantic-ui-react'
+import '../styles/App.css';
 
 const HeaderApp = () => (
-  <Header as='h3' color='yellow' block>
+  <Header className="app-font-color" as='h3' block>
   	<Icon name='code' />
     <Header.Content>
       Magrathea Gist

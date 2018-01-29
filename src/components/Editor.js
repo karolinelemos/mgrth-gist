@@ -5,6 +5,7 @@ import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/xml/xml'
 import 'codemirror/mode/markdown/markdown'
 import languagesConfig from '../assets/languages'
+import '../styles/App.css';
 
 class Editor extends Component {
 
@@ -17,6 +18,8 @@ class Editor extends Component {
 				name: '', 
 				code: ''
 			},
+			name: '',
+			code: '',
 			options: {
 				lineNumbers: true,
 				mode: ''
@@ -27,40 +30,45 @@ class Editor extends Component {
 	}
 
 	saveGist = () => { 
-		const newGist = this.state.gist;
+		const newGist = {
+				id: 0,
+				name: '', 
+				code: ''
+		};
+		newGist.name = this.state.name;
+		newGist.code = this.state.code;
 		this.props.action(newGist);
 	}
 
 	updateCode = (newCode) => {
-		const gist = this.state.gist;
-		gist.code = newCode;
-		this.setState({ gist })
+		const code = newCode;
+		this.setState({ code })
 	}
 
 	updateName = (event, data) => {
 		const options = this.state.options;
-		const gist = this.state.gist;
-		gist.name = data.value;
+		const name = data.value;
+		//gist.name = data.value;
 
-		if(gist.name.indexOf(".") !== -1)
+		if(name.indexOf(".") !== -1)
 		{
-			const extension = gist.name.substr(gist.name.indexOf("."), gist.name.lenght);
+			const extension = name.substr(name.indexOf("."), name.lenght);
 			const language = languagesConfig.find(lang => lang.text === extension);
 			if(language)
 				options.mode = language.value
 		}
 
-		this.setState({ gist, options })
+		this.setState({ name, options })
 	}
 
 	render() {
-		const { gist } = this.props ? this.props : this.state;
-        console.log(gist);
+		const gist = this.props.gist.name ? this.props.gist : this.state.gist;
+
 		return (
-			<div>
-				<Input onChange={this.updateName} fluid label='Nome' placeholder="Nome do gist com extensão"/>
+			<div className="Editor">
+				<Input className="text-input" onChange={this.updateName} defaultValue={gist.name} fluid label='Nome' placeholder="Nome do gist com extensão"/>
 				<CodeMirror value={gist.code} onChange={this.updateCode} options={this.state.options} />
-				<Button floated='right' gist={this.state.gist} primary onClick={this.saveGist}>Salvar</Button>
+				<Button className="btn-primary" floated='right' gist={this.state.gist} onClick={this.saveGist}>Salvar</Button>
 			</div>
 		);
 	}

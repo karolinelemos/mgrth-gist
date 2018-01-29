@@ -58,7 +58,7 @@ class App extends Component {
 			    		<Grid.Column width={3}>
 			    			<Menu gistList={this.state.list} action={this.actionGist}/>
 			    		</Grid.Column>
-			    		<Grid.Column width={10}>
+			    		<Grid.Column width={10} className="editor-grid">
 			    			<Editor action={this.updateGistList} gist={this.state.gist}/>
 			    		</Grid.Column>
 			    		<Grid.Column width={3}></Grid.Column>

@@ -1,5 +1,4 @@
 .App {
-	color: #FFF;
 	background-color: #FFF;
 }
 
@@ -9,12 +8,35 @@
 	z-index: -1;
 	height: 100%;
 	width: 100%;
+	background-repeat: no-repeat;
+	background-position: top center;
+	background: linear-gradient(to top, #442a4f, #fff, #fff, #fff);
 }
 
 .GridList {
 	display: flex;
+	align-items: center;
 }
 
 .GridList p {
 	width: 100%;
+}
+
+.app-font-color {
+	color: #442a4f;
+}
+
+.btn-primary {
+	background-color: #442a4f !important;
+	color: #FFF !important;
+}
+
+.editor-grid {
+	-webkit-box-shadow: 10px 10px 33px -9px rgba(110,108,110,1);
+	-moz-box-shadow: 10px 10px 33px -9px rgba(110,108,110,1);
+	box-shadow: 10px 10px 33px -9px rgba(110,108,110,1);
+}
+
+.text-input {
+	padding-bottom: 20px;
 }
