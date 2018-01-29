@@ -54,10 +54,12 @@ class Editor extends Component {
 	}
 
 	render() {
+		const { gist } = this.props ? this.props : this.state;
+        console.log(gist);
 		return (
 			<div>
 				<Input onChange={this.updateName} fluid label='Nome' placeholder="Nome do gist com extensão"/>
-				<CodeMirror value={this.props.gist.code} onChange={this.updateCode} options={this.state.options} />
+				<CodeMirror value={gist.code} onChange={this.updateCode} options={this.state.options} />
 				<Button floated='right' gist={this.state.gist} primary onClick={this.saveGist}>Salvar</Button>
 			</div>
 		);

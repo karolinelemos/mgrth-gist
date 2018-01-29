@@ -16,9 +16,9 @@ class MenuApp extends Component {
 		this.props.action('edit', element.id);
 	}
 
-	removeGist = () => 
+	removeGist = (e, element) => 
 	{
-		this.props.action('remove', this.gist);
+		this.props.action('remove', element.id);
 	}
 
 	render() {

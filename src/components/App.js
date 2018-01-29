@@ -35,13 +35,17 @@ class App extends Component {
 
 	actionGist(action, gistId)
 	{
-		const gist = this.state.list.find(g => g.id === gistId);
+		const gistList = this.state.list;
+		const gist = gistList.find(g => g.id === gistId);
 		switch(action)
 		{
 			case 'remove': 
-
+				const gistRemoveIndex = this.state.list.findIndex(g => g.id === gistId);
+				this.setState({ gistList: gistList.splice(gistRemoveIndex, 1) });
+				break;
 			case 'edit': 
-				this.setState({ gist })
+				this.setState({ gist: gist })
+				break;
 		} 
 	}
 
