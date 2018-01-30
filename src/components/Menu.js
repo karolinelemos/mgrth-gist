@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { Icon, Menu, Button } from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
 
 class MenuApp extends Component {
-	constructor(props) 
+	newGist = (e, element) => 
 	{
-		super(props);
+		this.props.action('new');
 	}
-
-	state = {}
-
-	handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
 	editGist = (e, element) => 
 	{
@@ -22,11 +19,9 @@ class MenuApp extends Component {
 	}
 
 	render() {
-		const { activeItem } = this.state
-
 		return (
 			<Menu vertical>
-				<Menu.Item name='new' active={activeItem === 'new'} onClick={this.handleItemClick}>
+				<Menu.Item onClick={this.newGist}>
 		          <Icon name='add' className="app-font-color" />
 		          Novo Gist
 		        </Menu.Item>
@@ -37,10 +32,11 @@ class MenuApp extends Component {
 		          		this.props.gistList ? 
 		          		(
 		          			this.props.gistList.map((gist) => {
+		          				const link = "/" + gist.name;
 		          				return (
 		          					<Menu.Item key={gist.id}>
 										<div className='GridList'>
-											<p>{gist.name}</p>
+											<Link to={{pathname: link, code: gist.code}}>{gist.name}</Link>
 										    <Button.Group className="app-font-color">
 												<Button basic size='mini' icon='pencil' onClick={this.editGist} id={gist.id}/>
 												<Button basic size='mini' icon='trash' onClick={this.removeGist} id={gist.id}/>

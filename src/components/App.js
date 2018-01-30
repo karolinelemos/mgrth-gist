@@ -13,9 +13,9 @@ class App extends Component {
 		this.state = {
 			list: [],
 			gist: {
-				id: '',
-				name: '',
-				code: ''
+				id: 0,
+				name: "",
+				code: ""
 			}
 		}
 
@@ -24,19 +24,29 @@ class App extends Component {
 	}
 
 	updateGistList(gist) {
-	    const newGist = gist;
+		const newGist = gist;
 	    const gistList = this.state.list;
-	    newGist.id = gistList.length;
+		if(gist.id)
+		{
+			const gistIndex = gistList.findIndex(g => g.id === gist.id);
+			gistList[gistIndex] = newGist;
+		} else {
+			newGist.id = gistList.length + 1;
+	    	gistList.push(newGist);
+		}
 
-	    gistList.push(newGist);
-
-	    this.setState({list: gistList});
+	    this.setState({list: gistList, gist: {name: '', code: '', id: ''}});
 	}
 
 	actionGist(action, gistId)
 	{
-		const gistList = this.state.list;
-		const gist = gistList.find(g => g.id === gistId);
+		var gist = this.state.gist, gistList;
+
+		if(gistId){
+			gistList = this.state.list;
+			gist = gistList.find(g => g.id === gistId);
+		}  
+
 		switch(action)
 		{
 			case 'remove': 
@@ -44,7 +54,10 @@ class App extends Component {
 				this.setState({ gistList: gistList.splice(gistRemoveIndex, 1) });
 				break;
 			case 'edit': 
-				this.setState({ gist: gist })
+				this.setState({ gist })
+				break;
+			default:
+				this.setState({ gist })
 				break;
 		} 
 	}
