@@ -1,8 +1,6 @@
 ##### This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-# Desafio Codebits
-
-O objetivo deste desafio de código é criar um clone simples do [GitHub Gist](https://gist.github.com/).
+Um clone simples do [GitHub Gist](https://gist.github.com/).
 
 - [CRUD](https://www.wikiwand.com/en/Create,_read,_update_and_delete) de _Snippets_ de código
 - Detectar a linguagem a partir do nome do _Snippet_ e mostrar o código com _syntax highlight_
